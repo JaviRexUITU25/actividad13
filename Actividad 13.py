@@ -29,7 +29,7 @@ while True:
                        'ID': ID,
                        'full_name': full_name,
                        'major': major
-                   }
+                   }}
     except ValueError:
         print("Ingrese un numero valido, intente de nuevo.")
     except Exception as e:
