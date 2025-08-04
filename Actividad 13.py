@@ -16,15 +16,33 @@ def option1():
         ID = input("Ingrese el ID del estudiante: ")
         full_name = input("Ingrese el nombre del estudiante: ")
         major = input("Ingrese la carrera o programa academico del estudiante: ")
-        print("¡Estudiante agregado correctamente!")
-        students[ID] = {
-            "ID" : ID,
-            "Nombre" : full_name,
-            "Carrera" : major
-        }
+        course_a = int(input("Ingrese cuantos cursos desea implementar: "))
+        for y in range(course_a):
+            print(f"curso #{y + 1}")
+            course_name = input("Ingrese nombre de curso")
+            course_note = input("Ingrese nota de curso")
+            print("¡Estudiante(s) y curso(s) agregado(s) correctamente!")
+            students[ID] = {
+                "ID" : ID,
+                "Nombre" : full_name,
+                "Carrera" : major,
+                "Courses" : {
+                    "Curso" : course_name,
+                    "Nota de curso" : course_note
+                }
+            }
+def student_search():
+    print("=" * 10 + "CONSULTAR ESTUDIANTE" + "="*10)
+    searching = input("Ingrese ID del estudiante: ")
+    if searching in students:
+        student = students[searching]
+        print("Estudiante encontrado!\n"
+              f"Nombre: {student["full_name"]}\n"
+              f"Carrera: {student["major"]}\n"
+              f"CUrso y nota: {student["Curso"],["Nota de curso"]}")
 
-while True:
     hello()
+while True:
     option = int(input("Ingrese la opcion que desea ingresar: "))
     try:
         match option:
