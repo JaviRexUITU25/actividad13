@@ -1,5 +1,5 @@
 students = {}
-curses = {}
+courses = {}
 def hello():
     print("-" * 8 + "BIENVENIDO A GESTION ACADEMICA:" + "-" * 8 + "\n"
           "1. Agregar estudiante:\n"
@@ -9,7 +9,6 @@ def hello():
           "5. Verificar estudiante aprobado: \n"
           "6. Mostrar lista de estudiantes: \n"
           "7. Salir")
-
 while True:
     hello()
     option = int(input("Ingrese la opcion que desea ingresar: "))
@@ -17,21 +16,47 @@ while True:
         if option == 1:
            print("-" * 10 + "AGREGAR ESTUDIANTE"+ "-"* 10)
            amount = int(input("Ingrese la cantidad de estudiantes que desea ingresar: "))
+           for i in range(amount):
+               print(f"Estudiante #{i + 1}")
+               ID = input("Ingrese el ID del estudiante: ")
+               full_name = input("Ingrese el nombre del estudiante: ")
+               major = input("Ingrese la carrera o programa academico del estudiante: ")
+               print("¡Estudiante agregado correctamente!")
+               students['ID'] = {
+                   'ID': ID,
+                   'full_name': full_name,
+                   'major': major
+               }
     except ValueError:
-        print("Ingrese un numero valido, intente de nuevo.")
-        for i in range(amount):
-           print(f"Estudiante #{i + 1}")
-           ID = input("Ingrese el ID del estudiante: ")
-           full_name = input("Ingrese el nombre del estudiante: ")
-           major = input("Ingrese la carrera o programa academico del estudiante: ")
-           print("¡Estudiante agregado correctamente!")
-        if option == 2:
-           print("-"*10 + "AGREGAR CURSOS Y NOTA"+ "-"* 10)
-           buscado = input("Ingrese el ID del estudiante: ")
-           if buscado in students:
-               curse_name = input("Ingrese el nombre del curso: ")
-               final_note = input("Ingrese la nota del curso: ")
-           else:
-                print("Ingrese un ID valido, intente de nuevo.")
-
-
+             print("Ingrese un numero valido, intente de nuevo.")
+    except Exception as e:
+           print("Se produjo un error inesperado.")
+    else:
+           if option == 2:
+               print("-"*10 + "AGREGAR CURSOS Y NOTA"+ "-"* 10)
+               total_courses = int(input("Ingrese el total de cursos que desea ingresar: "))
+               for i in range(total_courses):
+                   print(f"Curso #{i + 1}")
+                   ID = input("Ingrese el ID del estudiante: ")
+                   if ID in students:
+                       curse_name = input("Ingrese el nombre del curso: ")
+                       final_note = input("Ingrese la nota final del curso: ")
+                       print("Curso y nota agregados correctamente!")
+                   else:
+                       print("Estudiante no encontrado, intente de nuevo.")
+           if option == 3:
+               print("-" * 10 + "CONSULTAR ESTUDIANTE"+ "-"* 10)
+               for ID, data in students.items():
+                   print("Ingrese ID del estudiante: ")
+                   students['ID'] = {
+                       'ID': ID,
+                   }
+           if option == 4:
+               print("-"*10 + "CALCULAR PROMEDIO DE ESTUDIANTE"+ "-"* 10)
+           if option == 5:
+               print("-"*10 + "VERIFICAR ESTUDIANTE APROBADO"+ "-"* 10)
+           if option == 6:
+               print("-"*10+"LISTA DE ESTUDIANTES"+ "-"* 10)
+           if option == 7:
+               print("-"*10 + "SALIR, GRACIAS POR USAR EL PROGRAMA"+ "-"* 10)
+               break
