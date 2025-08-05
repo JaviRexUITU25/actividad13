@@ -36,12 +36,16 @@ def option1(): #SI EL USUARIO QUIERE AGREGAR UN ESTUDIANTE
                             print(f"curso #{y + 1}")
                             course_name = input("Ingrese nombre de curso: ")
                             course_note = input("Ingrese nota de curso: ")
+                            if course_note <"0":
+                                print("La nota debe ser positiva")
+                            elif course_note > "100":
+                                print("La nota debe ser menor a 100")
                             print("-" * 10 + "¡Curso agregado correctamente!" + "-" * 10)
                             courses[course_name] = {
                                 "course_name": course_name,
                                 "course_note": course_note
                             }
-                elif option2 == "2":
+                elif option2 == "2":  #Por si el usuario no quiere agregar nota
                     continue
             except ValueError:
                 print("El valor ingresado no es valido.")
@@ -55,7 +59,7 @@ def option1(): #SI EL USUARIO QUIERE AGREGAR UN ESTUDIANTE
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-def option2():
+def option2(): #CONSULTAR ESTUDIANTE POR CURSO Y ID
     try:
         print("=" * 10 + "CONSULTAR ESTUDIANTE" + "=" * 10)
         search_id2 = input("Ingrese el ID del estudiante: ").upper()
@@ -81,6 +85,47 @@ def option2():
     except Exception as e:
         print("Un error inesperado ha ocurrido")
 def average():
+    try:
+        print("=" * 10 + "PROMEDIO DE ESTUDIANTE" + "=" * 10)
+        average_search = input("Ingrese el ID del estudiante: ")
+        if average_search not in students:
+            print("El estudiante no existe")
+        else:
+            for id3,values in courses.items():
+                if id3 == average_search:
+                    average_total = courses/len(courses)
+    except ValueError:
+        print("El valor ingresado no es valido.")
+    except TypeError:
+        print("El valor ingresado no es valido.")
+    except Exception as e:
+        print("Un error inesperado ha ocurrido")
+def approved():
+    try:
+        print("=" * 10 + "VERIFICAR SI APRUEBA EL ESTUDIANTE" + "=" * 10)
+        approved_search = input("Ingrese el ID del estudiante: ")
+        if approved_search not in students:
+            print("El estudiante no existe")
+        else:
+            for id4,values in courses.items():
+                if id4 == approved_search:
+                    if id4 <"60":
+                        print("El estudiante reprobó")
+                    elif id4 > "60":
+                        print("El estudiante aprobó")
+    except ValueError:
+        print("El valor ingresado no es valido.")
+    except TypeError:
+        print("El valor ingresado no es valido.")
+    except Exception as e:
+        print("Un error inesperado ha ocurrido")
+def student_list():
+    try:
+        print("-"*10 + "MOSTRAR LISTA DE ESTUDIANTES" + "-"*10)
+        for id5, values in students.items():
+            for id6,values2 in courses.items():
+                if id6 == id5:
+                    print("Lista de estudiantes: ")
 
 
 while True:
@@ -92,25 +137,19 @@ while True:
                 option1()
             case 2:
                 option2()
+            case 3:
+                average()
+            case 4:
+                approved()
+            case 5:
+                student_list()
+            case 6:
+                break
+            case _:
+                print("El valor ingresado no es valido.")
     except ValueError:
         print("El valor ingresado no es valido.")
     except TypeError:
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-'''            case 2:
-                option2()
-            case 3:
-                student_search()
-            case _:
-                print("Opcion incorrecta")
-    except ValueError:
-        print("El valor ingresado no es valido.")'''
-
-'''def student_average():
-    print("="*10 + "PROMEDIO DE NOTAS" + "="*10)
-    average_search = input("Ingrese ID de estudiande: ")
-    if average_search in students:
-        average = course_notes// len(courses)
-    hello()
-def aprove_student():'''
