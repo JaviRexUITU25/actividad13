@@ -1,5 +1,5 @@
-students = {'1': {'full_name': 'jaavi', 'major': 'sistemas'}}
-courses = {"1":{'preca': 70, 'jiji': 90}}
+students = {}
+courses = {}
 def hello(): #SALUDO GENERAL
     print("-" * 8 + "BIENVENIDO A GESTION ACADEMICA:" + "-" * 8 + "\n"
           "1. Agregar estudiante.\n"
@@ -97,7 +97,7 @@ def average():                               #promedio total de notas
                     longitud = len(courses[id3])
                     for s in courses[id3].values():
                         suma += s
-            print(f"{suma/longitud}") #PROMEDIO TOTAL
+            print(f"{suma/longitud}")         #PROMEDIO TOTAL
     except ValueError:
         print("Debe ser un numero.")
     except TypeError:
@@ -115,7 +115,7 @@ def approved(): #VERIFICAR SI EL ESTUDIANTE APROBÓ
                 if id4 == approved_search:
                     if id4 <"60":
                         print("El estudiante reprobó")
-                    elif id4 > "61":
+                    else:
                         print("El estudiante aprobó")
     except ValueError:
         print("Debe ser un numero.")
