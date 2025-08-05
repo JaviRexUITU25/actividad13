@@ -84,26 +84,35 @@ def option2(): #CONSULTAR ESTUDIANTE POR CURSO Y ID
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-def average():
+def average():                               #promedio total de notas
     try:
         print("=" * 10 + "PROMEDIO DE ESTUDIANTE" + "=" * 10)
         average_search = input("Ingrese el ID del estudiante: ")
         if average_search not in students:
             print("El estudiante no existe")
         else:
-            for id3,values in courses.items():
+            suma = 0
+            longitud = 0
+            for id3,values in students.items():
                 if id3 == average_search:
-                    average_total = courses/len(courses)
+                    print(f"PROMEDIO GENERAL DE{values['full_name']}\n") #MUESTRA EL PROMEDIO DEL ESTUDIANTE
+                    for idp, value_p in courses.items():
+                        if idp == average_search:
+                            longitud = len(values)
+                            for s in values.values():
+                                suma += s
+                    break
+            print(f"{suma}/{longitud}") #PROMEDIO TOTAL
     except ValueError:
         print("El valor ingresado no es valido.")
     except TypeError:
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-def approved():
+def approved(): #VERIFICAR SI EL ESTUDIANTE APROBÓ
     try:
         print("=" * 10 + "VERIFICAR SI APRUEBA EL ESTUDIANTE" + "=" * 10)
-        approved_search = input("Ingrese el ID del estudiante: ")
+        approved_search = input("Ingrese el ID del estudiante: ").upper()
         if approved_search not in students:
             print("El estudiante no existe")
         else:
@@ -111,7 +120,7 @@ def approved():
                 if id4 == approved_search:
                     if id4 <"60":
                         print("El estudiante reprobó")
-                    elif id4 > "60":
+                    elif id4 > "61":
                         print("El estudiante aprobó")
     except ValueError:
         print("El valor ingresado no es valido.")
@@ -119,15 +128,20 @@ def approved():
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-def student_list():
+def student_list(): #LISTA DE TODOS LOS ESTUDIANTES
     try:
         print("-"*10 + "MOSTRAR LISTA DE ESTUDIANTES" + "-"*10)
         for id5, values in students.items():
-            for id6,values2 in courses.items():
-                if id6 == id5:
-                    print("Lista de estudiantes: ")
-
-
+            print(f"ID: {id5}\n"
+                  f"Nombre del estudiante: {values['full_name']}\n"
+                  f"Carrera: {values['major']}\n")
+            print(f"{courses[id5]}")
+    except ValueError:
+        print("El valor ingresado no es valido.")
+    except TypeError:
+        print("El valor ingresado no es valido.")
+    except Exception as e:
+        print("Un error inesperado ha ocurrido")
 while True:
     hello()
     option = int(input("Ingrese la opcion que desea ingresar: "))
@@ -144,12 +158,13 @@ while True:
             case 5:
                 student_list()
             case 6:
+                print("-"*10 + "Saliendo del programa." +"-"*10)
                 break
             case _:
                 print("El valor ingresado no es valido.")
     except ValueError:
-        print("El valor ingresado no es valido.")
+        print("Debe ser un numero.")
     except TypeError:
-        print("El valor ingresado no es valido.")
+        print("Ingrese un valor valido.")
     except Exception as e:
-        print("Un error inesperado ha ocurrido")
+        print("Un error inesperado ha ocurrido.")
