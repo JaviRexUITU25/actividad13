@@ -1,5 +1,5 @@
-students = {}
-courses = {}
+students = {'1': {'full_name': 'jaavi', 'major': 'sistemas'}}
+courses = {"1":{'preca': 70, 'jiji': 90}}
 def hello(): #SALUDO GENERAL
     print("-" * 8 + "BIENVENIDO A GESTION ACADEMICA:" + "-" * 8 + "\n"
           "1. Agregar estudiante.\n"
@@ -21,6 +21,7 @@ def option1(): #SI EL USUARIO QUIERE AGREGAR UN ESTUDIANTE
                 "full_name": full_name,
                 "major": major
             }
+            courses[idd] = {}
             print("-"*10 + "¡Estudiante agregado correctamente!"+ "-"*10)
             option2 =input("1. Si\n"                                        #SI EL USUARIO QUIERE AGREGAR EL CURSO Y SU NOTA
                            "2. No\n"
@@ -36,15 +37,10 @@ def option1(): #SI EL USUARIO QUIERE AGREGAR UN ESTUDIANTE
                             print(f"curso #{y + 1}")
                             course_name = input("Ingrese nombre de curso: ")
                             course_note = input("Ingrese nota de curso: ")
-                            if course_note <"0":
-                                print("La nota debe ser positiva")
-                            elif course_note > "100":
-                                print("La nota debe ser menor a 100")
+                            if "0" > course_note > "100":
+                                print("Ingrese una nota valida")
                             print("-" * 10 + "¡Curso agregado correctamente!" + "-" * 10)
-                            courses[course_name] = {
-                                "course_name": course_name,
-                                "course_note": course_note
-                            }
+                            courses[idd][course_name] = int(course_note)
                 elif option2 == "2":  #Por si el usuario no quiere agregar nota
                     continue
             except ValueError:
@@ -84,6 +80,8 @@ def option2(): #CONSULTAR ESTUDIANTE POR CURSO Y ID
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
+    print(students)
+    print(courses)
 def average():                               #promedio total de notas
     try:
         print("=" * 10 + "PROMEDIO DE ESTUDIANTE" + "=" * 10)
@@ -95,20 +93,17 @@ def average():                               #promedio total de notas
             longitud = 0
             for id3,values in students.items():
                 if id3 == average_search:
-                    print(f"PROMEDIO GENERAL DE{values['full_name']}\n") #MUESTRA EL PROMEDIO DEL ESTUDIANTE
-                    for idp, value_p in courses.items():
-                        if idp == average_search:
-                            longitud = len(values)
-                            for s in values.values():
-                                suma += s
-                    break
-            print(f"{suma}/{longitud}") #PROMEDIO TOTAL
+                    print(f"PROMEDIO GENERAL DE: {values['full_name']}\n") #MUESTRA EL PROMEDIO DEL ESTUDIANTE
+                    longitud = len(courses[id3])
+                    for s in courses[id3].values():
+                        suma += s
+            print(f"{suma/longitud}") #PROMEDIO TOTAL
     except ValueError:
-        print("El valor ingresado no es valido.")
+        print("Debe ser un numero.")
     except TypeError:
         print("El valor ingresado no es valido.")
     except Exception as e:
-        print("Un error inesperado ha ocurrido")
+        print("Un error inesperado ha ocurrido",e)
 def approved(): #VERIFICAR SI EL ESTUDIANTE APROBÓ
     try:
         print("=" * 10 + "VERIFICAR SI APRUEBA EL ESTUDIANTE" + "=" * 10)
@@ -123,7 +118,7 @@ def approved(): #VERIFICAR SI EL ESTUDIANTE APROBÓ
                     elif id4 > "61":
                         print("El estudiante aprobó")
     except ValueError:
-        print("El valor ingresado no es valido.")
+        print("Debe ser un numero.")
     except TypeError:
         print("El valor ingresado no es valido.")
     except Exception as e:
@@ -142,7 +137,7 @@ def student_list(): #LISTA DE TODOS LOS ESTUDIANTES
         print("El valor ingresado no es valido.")
     except Exception as e:
         print("Un error inesperado ha ocurrido")
-while True:
+while True: #DONDE SE EJECUTA EL PROGRAMA
     hello()
     option = int(input("Ingrese la opcion que desea ingresar: "))
     try:
